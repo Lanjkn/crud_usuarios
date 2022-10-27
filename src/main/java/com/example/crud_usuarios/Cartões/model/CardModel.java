@@ -1,7 +1,6 @@
 package com.example.crud_usuarios.Cartões.model;
 
-
-public class Card {
+public class CardModel {
     private long id;
     private long cardNumber;
     private int validThru;
