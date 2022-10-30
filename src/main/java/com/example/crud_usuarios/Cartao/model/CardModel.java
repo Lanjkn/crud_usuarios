@@ -1,6 +1,16 @@
 package com.example.crud_usuarios.Cartao.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class CardModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String cardholderName;
     private String cardNumber;
     private String validThru;
@@ -12,7 +22,8 @@ public class CardModel {
     public CardModel() {
     }
 
-    public CardModel(String cardholderName, String cardNumber, String validThru, String securityCode, String bank, String bankBranch, String bankAccountNumber) {
+    public CardModel(long id, String cardholderName, String cardNumber, String validThru, String securityCode, String bank, String bankBranch, String bankAccountNumber) {
+        this.id = id;
         this.cardholderName = cardholderName;
         this.cardNumber = cardNumber;
         this.validThru = validThru;
@@ -76,5 +87,13 @@ public class CardModel {
 
     public void setBankAccountNumber(String bankAccountNumber) {
         this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
