@@ -4,21 +4,22 @@ import com.example.crud_usuarios.Cartao.model.CardModel;
 import com.example.crud_usuarios.Cartao.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CardService {
 
+    private final CardRepository cardRepository;
+
     @Autowired
-    CardRepository cardRepository;
+    public CardService(CardRepository cardRepository) {
+        this.cardRepository = cardRepository;
+    }
 
     public List<CardModel> getCards() {
-        try {
-            return cardRepository.findAll();
-        } catch (Exception e) {
-            throw e;
-        }
+        return cardRepository.findAll();
     }
 
     public CardModel addCard(CardModel card) {
@@ -27,11 +28,7 @@ public class CardService {
     }
 
     public void deleteCard(Long id) {
-        try {
-            cardRepository.deleteById(id);
-        } catch (Exception e) {
-            throw e;
-        }
+        cardRepository.deleteById(id);
     }
 
     public CardModel getCard(Long id) {
@@ -39,23 +36,19 @@ public class CardService {
     }
 
     public CardModel updateCard(CardModel card, Long id) {
-        try {
-            Optional<CardModel> cardOptional = cardRepository.findById(id);
-            if (cardOptional.isPresent()) {
-                CardModel card1 = cardOptional.get();
-                card1.setCardholderName(card.getCardholderName());
-                card1.setCardNumber(card.getCardNumber());
-                card1.setValidThru(card.getValidThru());
-                card1.setSecurityCode(card.getSecurityCode());
-                card1.setBank(card.getBank());
-                card1.setBankBranch(card.getBankBranch());
-                card1.setBankAccountNumber(card.getBankAccountNumber());
-                return card;
-            }
-            return null;
-        } catch (Exception e) {
-            throw e;
+        Optional<CardModel> cardOptional = cardRepository.findById(id);
+        if (cardOptional.isPresent()) {
+            CardModel card1 = cardOptional.get();
+            card1.setCardholderName(card.getCardholderName());
+            card1.setCardNumber(card.getCardNumber());
+            card1.setValidThru(card.getValidThru());
+            card1.setSecurityCode(card.getSecurityCode());
+            card1.setBank(card.getBank());
+            card1.setBankBranch(card.getBankBranch());
+            card1.setBankAccountNumber(card.getBankAccountNumber());
+            return card;
         }
+        return null;
     }
 
     public CardModel getCardByCardNumber(String cardNumber) {
