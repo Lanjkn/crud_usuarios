@@ -1,11 +1,9 @@
 package com.example.crud_usuarios.Cartao.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "cards")
 public class CardModel {
 
     @Id
@@ -18,20 +16,6 @@ public class CardModel {
     private String bank;
     private String bankBranch;
     private String bankAccountNumber;
-
-    public CardModel() {
-    }
-
-    public CardModel(long id, String cardholderName, String cardNumber, String validThru, String securityCode, String bank, String bankBranch, String bankAccountNumber) {
-        this.id = id;
-        this.cardholderName = cardholderName;
-        this.cardNumber = cardNumber;
-        this.validThru = validThru;
-        this.securityCode = securityCode;
-        this.bank = bank;
-        this.bankBranch = bankBranch;
-        this.bankAccountNumber = bankAccountNumber;
-    }
 
     public String getCardholderName() {
         return cardholderName;
