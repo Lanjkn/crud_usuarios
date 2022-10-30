@@ -9,16 +9,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
-    @Autowired
-    UsuarioController usuarioController;
-    public Boolean login(LoginModel usuario){
 
+    private final UsuarioController usuarioController;
+
+    @Autowired
+    public LoginService(UsuarioController usuarioController) {
+        this.usuarioController = usuarioController;
+    }
+
+    public Boolean login(LoginModel usuario) {
         User usuarioBanco = usuarioController.getUsuarioByEmail(usuario.getEmail());
 
-        if (usuarioBanco.getPassword().equals(Util.hash_sha256(usuario.getPassword()))){
-            return true;
-        } else {
-            return false;
-        }
+        return usuarioBanco.getPassword().equals(Util.hashSHA256(usuario.getPassword()));
     }
 }

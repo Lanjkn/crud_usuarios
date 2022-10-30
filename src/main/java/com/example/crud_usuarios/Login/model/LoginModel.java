@@ -9,6 +9,8 @@ public class LoginModel {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    private String email;
+
     private String password;
 
     public String getEmail() {
@@ -18,8 +20,6 @@ public class LoginModel {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    private String email;
 
     public Long getId() {
         return id;

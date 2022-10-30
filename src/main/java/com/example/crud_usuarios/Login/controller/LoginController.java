@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+    private final LoginService service;
+
     @Autowired
-    private LoginService service;
+    public LoginController(LoginService service) {
+        this.service = service;
+    }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginModel> login(@RequestBody LoginModel usuario){
-        if(service.login(usuario)){
+    public ResponseEntity<LoginModel> login(@RequestBody LoginModel usuario) {
+        if (service.login(usuario)) {
             return ResponseEntity.ok(usuario);
         } else {
             return ResponseEntity.badRequest().build();
