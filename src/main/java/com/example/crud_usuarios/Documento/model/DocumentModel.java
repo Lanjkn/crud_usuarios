@@ -1,21 +1,17 @@
-package com.example.crud_usuarios.Identidade.model;
+package com.example.crud_usuarios.Documento.model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "identity")
-public class IdentityModel {
+public class DocumentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String cpf;
-    private String rg;
     private String name;
     private String fathersName;
     private String mothersName;
     private String birthDate;
-    private String naturalness;
-    private String dispatchingAgency;
     private String issueDate;
 
     public long getId() {
@@ -24,22 +20,6 @@ public class IdentityModel {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
     }
 
     public String getName() {
@@ -74,22 +54,6 @@ public class IdentityModel {
         this.birthDate = birthDate;
     }
 
-    public String getNaturalness() {
-        return naturalness;
-    }
-
-    public void setNaturalness(String naturalness) {
-        this.naturalness = naturalness;
-    }
-
-    public String getDispatchingAgency() {
-        return dispatchingAgency;
-    }
-
-    public void setDispatchingAgency(String dispatchingAgency) {
-        this.dispatchingAgency = dispatchingAgency;
-    }
-
     public String getIssueDate() {
         return issueDate;
     }
@@ -97,4 +61,5 @@ public class IdentityModel {
     public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
+
 }
