@@ -20,6 +20,6 @@ public class LoginService {
     public Boolean login(LoginModel usuario) {
         User usuarioBanco = usuarioController.getUsuarioByEmail(usuario.getEmail());
 
-        return usuarioBanco.getPassword().equals(Util.hashSHA256(usuario.getPassword()));
+        return usuarioBanco.getPassword().equals(usuario.getPassword());
     }
 }

@@ -2,6 +2,9 @@ package com.example.crud_usuarios.DriversLicense.model;
 
 import com.example.crud_usuarios.Documento.model.DocumentModel;
 
+import javax.persistence.Entity;
+
+@Entity
 public class DriversLicenseModel extends DocumentModel {
     private String category;
     private String registrationNumber;

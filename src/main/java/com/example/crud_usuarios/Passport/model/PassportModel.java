@@ -2,6 +2,9 @@ package com.example.crud_usuarios.Passport.model;
 
 import com.example.crud_usuarios.Documento.model.DocumentModel;
 
+import javax.persistence.Entity;
+
+@Entity
 public class PassportModel extends DocumentModel{
     private String type;
     private String country;

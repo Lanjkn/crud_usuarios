@@ -57,7 +57,7 @@ public class IdentityService {
     }
 
     public IdentityModel getIdentityByRG(String rg) {
-        return identityRepository.findByRG(rg);
+        return identityRepository.findByRg(rg);
     }
 
 }

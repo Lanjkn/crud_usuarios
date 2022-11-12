@@ -2,8 +2,7 @@ package com.example.crud_usuarios.Documento.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "identity")
+@MappedSuperclass
 public class DocumentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

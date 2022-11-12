@@ -2,6 +2,9 @@ package com.example.crud_usuarios.Identity.model;
 
 import com.example.crud_usuarios.Documento.model.DocumentModel;
 
+import javax.persistence.Entity;
+
+@Entity
 public class IdentityModel extends DocumentModel {
     private String rg;
     private String dispatchingAgency;
