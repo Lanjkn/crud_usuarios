@@ -24,7 +24,7 @@ public class CadastroController {
         return cadastroService.cadastrar(usuario);
     }
 
-    @PostMapping("/mfa")
+    @PostMapping("/mfaQRCode")
     public String mfa(@RequestBody String email) {
         return cadastroService.getMfaQRCode(email);
     }
