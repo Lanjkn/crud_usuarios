@@ -2,6 +2,8 @@ package com.example.crud_usuarios.Cartao.service;
 
 import com.example.crud_usuarios.Cartao.model.CardModel;
 import com.example.crud_usuarios.Cartao.repository.CardRepository;
+import com.example.crud_usuarios.Usuarios.model.User;
+import com.example.crud_usuarios.Usuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,22 @@ public class CardService {
 
     private final CardRepository cardRepository;
 
+    private final UsuarioService usuarioService;
+
     @Autowired
-    public CardService(CardRepository cardRepository) {
+    public CardService(CardRepository cardRepository, UsuarioService usuarioService) {
         this.cardRepository = cardRepository;
+        this.usuarioService = usuarioService;
     }
 
-    public List<CardModel> getCards() {
-        return cardRepository.findAll();
+    public List<CardModel> getCards(String userEmail) {
+        User user = usuarioService.getUsuarioByEmail(userEmail);
+        return cardRepository.findByUser(user);
     }
 
-    public CardModel addCard(CardModel card) {
+    public CardModel addCard(CardModel card, String userEmail) {
+        User usuario = usuarioService.getUsuarioByEmail(userEmail);
+        card.setUser(usuario);
         cardRepository.save(card);
         return card;
     }

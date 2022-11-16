@@ -1,5 +1,7 @@
 package com.example.crud_usuarios.Cartao.model;
 
+import com.example.crud_usuarios.Usuarios.model.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,18 @@ public class CardModel {
     private String bank;
     private String bankBranch;
     private String bankAccountNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getCardholderName() {
         return cardholderName;

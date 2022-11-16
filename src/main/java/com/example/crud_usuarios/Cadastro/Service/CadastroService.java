@@ -1,6 +1,5 @@
 package com.example.crud_usuarios.Cadastro.Service;
 
-import com.example.crud_usuarios.JWT.config.JwtTokenUtil;
 import com.example.crud_usuarios.Usuarios.model.User;
 import com.example.crud_usuarios.Usuarios.service.UsuarioService;
 import com.example.crud_usuarios.Util.Util;
@@ -25,7 +24,7 @@ public class CadastroService {
             throw new RuntimeException("Email já cadastrado");
         }
         usuario.setSecretKey(generateSecretKey());
-        usuario.setPassword(Util.BCryptEncode(usuario.getPassword()));
+        usuario.setPassword(Util.hashSHA256(usuario.getPassword()));
         usuarioService.addUsuario(usuario);
         return usuario;
     }

@@ -1,8 +1,11 @@
 package com.example.crud_usuarios.Passport.model;
 
 import com.example.crud_usuarios.Documento.model.DocumentModel;
+import com.example.crud_usuarios.Usuarios.model.User;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class PassportModel extends DocumentModel{
@@ -14,6 +17,18 @@ public class PassportModel extends DocumentModel{
     private String authority;
     private String naturalness;
     private String expirationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     public String getType() {
         return type;
     }

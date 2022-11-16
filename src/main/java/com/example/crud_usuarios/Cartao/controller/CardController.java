@@ -1,5 +1,6 @@
 package com.example.crud_usuarios.Cartao.controller;
 
+import com.example.crud_usuarios.Cartao.model.CardDTO;
 import com.example.crud_usuarios.Cartao.model.CardModel;
 import com.example.crud_usuarios.Cartao.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class CardController {
 
     private final CardService service;
@@ -18,13 +20,13 @@ public class CardController {
     }
 
     @GetMapping("/cards")
-    public List<CardModel> getCards() {
-        return service.getCards();
+    public List<CardModel> getCards(@RequestHeader String userEmail) {
+        return service.getCards(userEmail);
     }
 
     @PostMapping("/cards")
-    public CardModel addCard(@RequestBody CardModel card) {
-        return service.addCard(card);
+    public CardModel addCard(@RequestBody CardDTO card) {
+        return service.addCard(card.getCard(), card.getUserEmail());
     }
 
     @DeleteMapping("/card_delete/{id}")

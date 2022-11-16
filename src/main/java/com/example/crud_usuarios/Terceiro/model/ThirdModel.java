@@ -1,5 +1,7 @@
 package com.example.crud_usuarios.Terceiro.model;
 
+import com.example.crud_usuarios.Usuarios.model.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,18 @@ public class ThirdModel {
     private String username;
     private String password;
     private String applicationName;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public long getId() {
         return id;
