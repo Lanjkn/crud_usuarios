@@ -19,11 +19,12 @@ public class CreditCardController {
         this.creditCardService = creditCardService;
     }
 
+    @CrossOrigin
     @GetMapping("/creditCards")
     public List<CreditCard> findAllCreditCards(@RequestHeader String userEmail) {
         return creditCardService.findAllCreditCards(userEmail);
     }
-
+    @CrossOrigin
     @PostMapping("/creditCards")
     public CreditCard saveCreditCard(@RequestBody CreditCardDTO creditCardDTO) {
         return creditCardService.saveCreditCard(creditCardDTO.getCreditCard(), creditCardDTO.getUserEmail());
