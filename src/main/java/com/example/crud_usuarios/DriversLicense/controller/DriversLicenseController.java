@@ -1,5 +1,6 @@
 package com.example.crud_usuarios.DriversLicense.controller;
 
+import com.example.crud_usuarios.DriversLicense.model.DriversLicenseDTO;
 import com.example.crud_usuarios.DriversLicense.model.DriversLicenseModel;
 import com.example.crud_usuarios.DriversLicense.service.DriversLicenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class DriversLicenseController {
     }
 
     @GetMapping("/driversLicences")
-    public List<DriversLicenseModel> getDriversLicenses() {
-        return service.getDriversLicenses();
+    public List<DriversLicenseModel> getDriversLicenses(@RequestHeader String userEmail) {
+        return service.getDriversLicenses(userEmail);
     }
 
     @PostMapping("/driversLicenses")
-    public DriversLicenseModel addDriversLicense(@RequestBody DriversLicenseModel driversLicense) {
-        return service.addDriversLicense(driversLicense);
+    public DriversLicenseModel addDriversLicense(@RequestBody DriversLicenseDTO driversLicense) {
+        return service.addDriversLicense(driversLicense.getDriversLicense(), driversLicense.getUserEmail());
     }
 
     @DeleteMapping("/driversLicense_delete/{id}")

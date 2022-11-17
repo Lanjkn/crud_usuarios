@@ -2,6 +2,7 @@ package com.example.crud_usuarios.Terceiro.service;
 
 import com.example.crud_usuarios.Terceiro.model.ThirdModel;
 import com.example.crud_usuarios.Terceiro.repository.ThirdRepositiry;
+import com.example.crud_usuarios.Usuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +13,21 @@ import java.util.Optional;
 public class ThirdService {
 
     ThirdRepositiry thirdRepositiry;
+    UsuarioService usuarioService;
 
     @Autowired
-    public ThirdService(ThirdRepositiry thirdRepositiry) {
+    public ThirdService(ThirdRepositiry thirdRepositiry, UsuarioService usuarioService) {
         this.thirdRepositiry = thirdRepositiry;
+        this.usuarioService = usuarioService;
     }
 
-    public List<ThirdModel> getThirds() {
-        return thirdRepositiry.findAll();
+    public List<ThirdModel> getThirds(String userEmail) {
+        return thirdRepositiry.findByUser(usuarioService.getUsuarioByEmail(userEmail));
     }
 
-    public ThirdModel addThird(ThirdModel third) {
-        thirdRepositiry.save(third);
-        return third;
+    public ThirdModel addThird(ThirdModel third, String userEmail) {
+        third.setUser(usuarioService.getUsuarioByEmail(userEmail));
+        return thirdRepositiry.save(third);
     }
 
     public void deleteThird(Long id) {

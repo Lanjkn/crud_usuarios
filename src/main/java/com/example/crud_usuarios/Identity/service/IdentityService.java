@@ -2,6 +2,7 @@ package com.example.crud_usuarios.Identity.service;
 
 import com.example.crud_usuarios.Identity.model.IdentityModel;
 import com.example.crud_usuarios.Identity.repository.IdentityRepository;
+import com.example.crud_usuarios.Usuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +12,21 @@ import java.util.Optional;
 @Service
 public class IdentityService {
 
-    IdentityRepository identityRepository;
+    private final IdentityRepository identityRepository;
+    private final UsuarioService usuarioService;
 
     @Autowired
-        public IdentityService(IdentityRepository identityRepository) {
+        public IdentityService(IdentityRepository identityRepository, UsuarioService usuarioService) {
         this.identityRepository = identityRepository;
+        this.usuarioService = usuarioService;
     }
 
-    public List<IdentityModel> getIdentities() {
-        return identityRepository.findAll();
+    public List<IdentityModel> getIdentities(String userEmail) {
+        return identityRepository.findByUser(usuarioService.getUsuarioByEmail(userEmail));
     }
 
-    public IdentityModel addIdentity(IdentityModel identity) {
+    public IdentityModel addIdentity(IdentityModel identity, String userEmail) {
+        identity.setUser(usuarioService.getUsuarioByEmail(userEmail));
         identityRepository.save(identity);
         return identity;
     }

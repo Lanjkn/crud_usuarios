@@ -1,5 +1,6 @@
 package com.example.crud_usuarios.Identity.controller;
 
+import com.example.crud_usuarios.Identity.model.IdentityDTO;
 import com.example.crud_usuarios.Identity.model.IdentityModel;
 import com.example.crud_usuarios.Identity.service.IdentityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class IdentityController {
     }
 
     @GetMapping("/identities")
-    public List<IdentityModel> getIdentities() {
-        return service.getIdentities();
+    public List<IdentityModel> getIdentities(@RequestHeader String userEmail) {
+        return service.getIdentities(userEmail);
     }
 
     @PostMapping("/identities")
-    public IdentityModel addIdentity(@RequestBody IdentityModel identity) {
-        return service.addIdentity(identity);
+    public IdentityModel addIdentity(@RequestBody IdentityDTO identity) {
+        return service.addIdentity(identity.getIdentity(), identity.getUserEmail());
     }
 
     @DeleteMapping("/identity_delete/{id}")

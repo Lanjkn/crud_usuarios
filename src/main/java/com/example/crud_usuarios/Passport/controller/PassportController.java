@@ -1,5 +1,6 @@
 package com.example.crud_usuarios.Passport.controller;
 
+import com.example.crud_usuarios.Passport.model.PassportDTO;
 import com.example.crud_usuarios.Passport.model.PassportModel;
 import com.example.crud_usuarios.Passport.service.PassportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class PassportController {
     }
 
     @GetMapping("/passports")
-    public List<PassportModel> getPassports() {
-        return service.getPassports();
+    public List<PassportModel> getPassports(@RequestHeader String userEmail) {
+        return service.getPassports(userEmail);
     }
 
     @PostMapping("/passports")
-    public PassportModel addPassport(@RequestBody PassportModel passport) {
-        return service.addPassport(passport);
+    public PassportModel addPassport(@RequestBody PassportDTO passport) {
+        return service.addPassport(passport.getPassport(), passport.getUserEmail());
     }
 
     @DeleteMapping("/passport_delete/{id}")

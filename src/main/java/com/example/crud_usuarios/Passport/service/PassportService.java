@@ -1,7 +1,10 @@
 package com.example.crud_usuarios.Passport.service;
 
+import com.example.crud_usuarios.Cartao.model.CardModel;
 import com.example.crud_usuarios.Passport.model.PassportModel;
 import com.example.crud_usuarios.Passport.repository.PassportRepository;
+import com.example.crud_usuarios.Usuarios.model.User;
+import com.example.crud_usuarios.Usuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +14,21 @@ import java.util.Optional;
 @Service
 public class PassportService {
     PassportRepository passportRepository;
+    UsuarioService usuarioService;
 
     @Autowired
-    public PassportService(PassportRepository passportRepository) {
+    public PassportService(PassportRepository passportRepository, UsuarioService usuarioService) {
         this.passportRepository = passportRepository;
+        this.usuarioService = usuarioService;
     }
 
-    public List<PassportModel> getPassports() {
-        return passportRepository.findAll();
+    public List<PassportModel> getPassports(String userEmail) {
+        return passportRepository.findByUser(usuarioService.getUsuarioByEmail(userEmail));
     }
 
-    public PassportModel addPassport(PassportModel passport) {
+    public PassportModel addPassport(PassportModel passport, String userEmail) {
+        User usuario = usuarioService.getUsuarioByEmail(userEmail);
+        passport.setUser(usuario);
         passportRepository.save(passport);
         return passport;
     }

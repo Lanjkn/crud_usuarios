@@ -2,6 +2,8 @@ package com.example.crud_usuarios.DriversLicense.service;
 
 import com.example.crud_usuarios.DriversLicense.model.DriversLicenseModel;
 import com.example.crud_usuarios.DriversLicense.repository.DriversLicenseRepository;
+import com.example.crud_usuarios.Usuarios.model.User;
+import com.example.crud_usuarios.Usuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,18 +12,23 @@ import java.util.Optional;
 
 @Service
 public class DriversLicenseService {
-    DriversLicenseRepository driversLicenseRepository;
+    private final DriversLicenseRepository driversLicenseRepository;
+    private final UsuarioService usuarioService;
 
     @Autowired
-    public DriversLicenseService(DriversLicenseRepository driversLicenseRepository) {
+    public DriversLicenseService(DriversLicenseRepository driversLicenseRepository, UsuarioService usuarioService) {
         this.driversLicenseRepository = driversLicenseRepository;
+        this.usuarioService = usuarioService;
     }
 
-    public List<DriversLicenseModel> getDriversLicenses() {
-        return driversLicenseRepository.findAll();
+    public List<DriversLicenseModel> getDriversLicenses(String userEmail) {
+        User user = usuarioService.getUsuarioByEmail(userEmail);
+        return driversLicenseRepository.findByUser(user);
     }
 
-    public DriversLicenseModel addDriversLicense(DriversLicenseModel driversLicense) {
+    public DriversLicenseModel addDriversLicense(DriversLicenseModel driversLicense, String userEmail) {
+        User user = usuarioService.getUsuarioByEmail(userEmail);
+        driversLicense.setUser(user);
         driversLicenseRepository.save(driversLicense);
         return driversLicense;
     }
