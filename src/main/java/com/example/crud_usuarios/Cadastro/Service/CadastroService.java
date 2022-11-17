@@ -24,7 +24,7 @@ public class CadastroService {
             throw new RuntimeException("Email já cadastrado");
         }
         usuario.setSecretKey(generateSecretKey());
-        usuario.setPassword(Util.hashSHA256(usuario.getPassword()));
+        usuario.setPassword(Util.BCryptEncode(usuario.getPassword()));
         usuarioService.addUsuario(usuario);
         return usuario;
     }
