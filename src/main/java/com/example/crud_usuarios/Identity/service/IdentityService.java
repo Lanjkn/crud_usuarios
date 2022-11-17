@@ -41,9 +41,7 @@ public class IdentityService {
             IdentityModel identity1 = identityOptional.get();
 
             identity1.setRg(identity.getRg());
-            identity1.setDispatchingAgency(identity.getDispatchingAgency());
             identity1.setCpf(identity.getCpf());
-            identity1.setNaturalness(identity.getNaturalness());
 
             identity1.setName(identity.getName());
             identity1.setFathersName(identity.getFathersName());

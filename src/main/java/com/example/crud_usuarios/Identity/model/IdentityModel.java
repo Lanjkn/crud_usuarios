@@ -9,10 +9,12 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class IdentityModel extends DocumentModel {
+    private String name;
     private String rg;
-    private String dispatchingAgency;
-    private String naturalness;
     private String cpf;
+    private String motherName;
+    private String fatherName;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -25,6 +27,16 @@ public class IdentityModel extends DocumentModel {
         this.user = user;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getRg() {
         return rg;
     }
@@ -33,27 +45,27 @@ public class IdentityModel extends DocumentModel {
         this.rg = rg;
     }
 
-    public String getDispatchingAgency() {
-        return dispatchingAgency;
-    }
-
-    public void setDispatchingAgency(String dispatchingAgency) {
-        this.dispatchingAgency = dispatchingAgency;
-    }
-
-    public String getNaturalness() {
-        return naturalness;
-    }
-
-    public void setNaturalness(String naturalness) {
-        this.naturalness = naturalness;
-    }
-
     public String getCpf() {
         return cpf;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getMotherName() {
+        return motherName;
+    }
+
+    public void setMotherName(String motherName) {
+        this.motherName = motherName;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
     }
 }
